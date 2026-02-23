@@ -1,0 +1,93 @@
+[2025-11-26 20:10:36] 
+================================================================================
+[2025-11-26 20:10:36] Benchmark Configuration
+[2025-11-26 20:10:36] ================================================================================
+[2025-11-26 20:10:36] Judge Model: Qwen/Qwen3-32B
+[2025-11-26 20:10:36] Benchmarks: standard contextual
+[2025-11-26 20:10:36] Subject Model: gpt-4o-mini
+[2025-11-26 20:10:36] Processes: 100
+[2025-11-26 20:10:36] Temperature: 0.6
+[2025-11-26 20:10:36] Log File: ./logs/benchmark_run_Qwen3-32B.log
+[2025-11-26 20:10:36] Total Tasks: 3
+[2025-11-26 20:10:36] 
+================================================================================
+[2025-11-26 20:10:36] Starting ID-based scoring
+[2025-11-26 20:10:36] ================================================================================
+[2025-11-26 20:10:36] Running: standard (ID) | Subject: gpt-4o-mini | Judge: Qwen3-32B
+Processing 3 items.
+Processing items:   0%|          | 0/3 [00:00<?, ?it/s]Processing items:  33%|███▎      | 1/3 [00:06<00:13,  6.88s/it]Processing items:  67%|██████▋   | 2/3 [00:06<00:02,  2.90s/it]Processing items: 100%|██████████| 3/3 [00:07<00:00,  1.70s/it]Processing items: 100%|██████████| 3/3 [00:07<00:00,  2.42s/it]
+Error: Connection error.
+Error processing item #870585
+Retrying... (1/5)
+Error: Connection error.
+Error processing item #870585
+Retrying... (2/5)
+Error: Connection error.
+Error processing item #870585
+Retrying... (3/5)
+Error: Connection error.
+Error processing item #870585
+Retrying... (4/5)
+Error: Connection error.
+Error processing item #870585
+Retrying... (5/5)
+Error: Connection error.
+Error processing item #868133
+Retrying... (1/5)
+Error: Connection error.
+Error processing item #868133
+Retrying... (2/5)
+Error: Connection error.
+Error processing item #868133
+Retrying... (3/5)
+Error: Connection error.
+Error processing item #868133
+Retrying... (4/5)
+Error: Connection error.
+Error processing item #868133
+Retrying... (5/5)
+Error: Connection error.
+Error processing item #753655
+Retrying... (1/5)
+Error: Connection error.
+Error processing item #753655
+Retrying... (2/5)
+Error: Connection error.
+Error processing item #753655
+Retrying... (3/5)
+Error: Connection error.
+Error processing item #753655
+Retrying... (4/5)
+Error: Connection error.
+Error processing item #753655
+Retrying... (5/5)
+Processing completed.
+Total successful items: 0. 
+Remaining items to process: 3.
+[2025-11-26 20:10:45] ✅ Completed: standard (ID)
+[2025-11-26 20:10:45] Progress: 33% (1/3) | Elapsed: 00:00:09 | Remaining: 0h 0m
+[2025-11-26 20:10:45] 
+================================================================================
+[2025-11-26 20:10:45] Starting MG-based scoring
+[2025-11-26 20:10:45] ================================================================================
+[2025-11-26 20:10:45] Running: standard (MG) | Subject: gpt-4o-mini | Judge: Qwen3-32B
+Processing 0 items.
+Processing completed.
+Total successful items: 5. 
+ Remaining items to process: 0.
+[2025-11-26 20:10:46] ✅ Completed: standard (MG)
+[2025-11-26 20:10:46] Progress: 66% (2/3) | Elapsed: 00:00:10 | Remaining: 0h 0m
+[2025-11-26 20:10:46] Running: contextual (MG) | Subject: gpt-4o-mini | Judge: Qwen3-32B
+Processing 0 items.
+Processing completed.
+Total successful items: 8. 
+ Remaining items to process: 0.
+[2025-11-26 20:10:47] ✅ Completed: contextual (MG)
+[2025-11-26 20:10:47] Progress: 100% (3/3) | Elapsed: 00:00:11 | Remaining: 0h 0m
+[2025-11-26 20:10:47] 
+================================================================================
+[2025-11-26 20:10:47] Benchmark Completed
+[2025-11-26 20:10:47] ================================================================================
+[2025-11-26 20:10:47] Total Runtime: 00:00:11
+[2025-11-26 20:10:47] Results saved in ./results/
+[2025-11-26 20:10:47] Log saved to ./logs/benchmark_run_Qwen3-32B.log

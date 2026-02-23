@@ -1,0 +1,142 @@
+[
+    {
+        "id": "#874336",
+        "question": "What do you advise to plant in shade on a grade? I have a sizable driveway island that has 20 trees with a big canopy. You can see shade has disallowed grass to grow but the tree roots are not enough to keep erosion from happening. What do you advise to plant in this space that could help with erosion but live in the shade?",
+        "answer": "For an area beneath large trees with heavy shade and where grass does not establish, ground covers that tolerate shade and can stabilize slopes are recommended. Dead nettle (Lamium) is a strong choice as it handles shade well and will help cover the soil to prevent erosion. Hosta is another excellent option for shaded slopes due to its tolerance of low-light conditions and effective ground coverage. Other suitable shade-loving plants include bergenia, wild ginger (Asarum), cranesbill (Geranium), and Solomon's seal (Polygonatum). These plants are all recognized for their ability to thrive in dry shade, suppress weeds, and reduce soil erosion on grades under tree canopies. Choose varieties with a dense growth habit to ensure continuous soil protection, and group plantings to achieve robust coverage, particularly targeting the barest patches for initial establishment.",
+        "images": [
+            "../sample_images/#874336_0.jpg",
+            "../sample_images/#874336_1.jpg",
+            "../sample_images/#874336_2.jpg"
+        ],
+        "category": "Plant Care and Gardening Guidance",
+        "entity_type": "plant",
+        "entity_name": "dead nettle",
+        "entity_scientific_name": "",
+        "entity_common_names": [],
+        "meta_data_state": "Minnesota",
+        "meta_data_county": "Hennepin County",
+        "meta_data_asked_time": "2024-06-23 19:47:00"
+    },
+    {
+        "id": "#654409",
+        "question": "Tomato wilt fungus? Three tomato plants I bought as seedlings have begun to wilt with stems curling down. A fourth plant that grew as a volunteer had no problems. Can you identify and recommend a solution?",
+        "answer": "Wilt diseases clog up the plants' water vessels causing leaves to go limp. We see the curling and twisting but no actual wilting. We also think we see the flattening and widening of a main stem (fasciation), which is an unusual symptom associated with herbicide exposure and viruses. The only thing to do at this point is monitor the plants. Please let us know if symptoms change (e.g., twisting, deformity of leaves) or worsen.",
+        "images": [
+            "../sample_images/#654409_0.jpg",
+            "../sample_images/#654409_1.jpg",
+            "../sample_images/#654409_2.jpg"
+        ],
+        "category": "Plant Disease Management",
+        "entity_type": "plant disease",
+        "entity_name": "wilt disease",
+        "entity_scientific_name": "",
+        "entity_common_names": [],
+        "meta_data_state": "Maryland",
+        "meta_data_county": "Montgomery County",
+        "meta_data_asked_time": "2020-06-22 16:57:09"
+    },
+    {
+        "id": "#868133",
+        "question": "Please answer the following user question. You should first analyze the provided image, mentioning any visible clues or observations. Then, present the identification result. Write the entire content as one coherent paragraph (analysis + results). \nUser: I am concerned that the leaves on my young dahlia plant show signs of Dahlia virus. Does this look to be viral?",
+        "answer": "The images of your young dahlia plant display leaves with subtle vein clearing and a slight yellowing pattern along the veins, alongside the presence of necrotic brown lesions on some leaf surfaces. These symptoms align closely with those caused by Dahlia mosaic virus (DMV), a viral pathogen known to induce chlorosis, leaf malformation, vein clearing, and necrotic spots in dahlias. The overall leaf appearance, including the vein-centered chlorosis and damaged patches, supports the diagnosis of DMV infection. Since there is no cure for this virus once the plant is infected, the recommended action is to carefully dispose of the affected tubers and plant material to prevent further spread. Additionally, thorough disinfection of tools and careful monitoring of nearby plants are essential steps to minimize virus transmission within your garden.",
+        "images": [
+            "../sample_images/#868133_0.jpg",
+            "../sample_images/#868133_1.jpg"
+        ],
+        "category": "Plant Disease Identification",
+        "entity_type": "plant disease",
+        "entity_name": "dahlia mosaic virus",
+        "entity_scientific_name": "Dahlia mosaic virus",
+        "entity_common_names": [],
+        "meta_data_state": "Michigan",
+        "meta_data_county": "Lenawee County",
+        "meta_data_asked_time": "2024-05-12 22:30:00"
+    },
+    {
+        "id": "#789132",
+        "question": "I fear my compost pile is infested with jumping worms. Hundreds of them. Now what should I do about the jumping worms?",
+        "answer": "Jumping worms (such as Amynthas agrestis, Amynthas tokioensis, Metaphire hilgendorfi) are invasive earthworms known for producing uniform, granular castings that resemble coffee grounds. When disturbed, these worms thrash violently with snakelike movement, which distinguishes them from European nightcrawlers. Mature jumping worms have a white, fully encircling clitellum, which is different from the u-shaped clitellum of European garden worms.\n\nThese worms are problematic because they destroy the soil food web by rapidly consuming and eliminating the organic layer at the surface. If your compost pile is infested with hundreds of jumping worms, eradication is challenging, but there are management steps you can take:\n\n1. **Hot Composting:** Raise the temperature of your compost pile significantly. High heat helps kill both adult worms and their cocoons.\n\n2. **Solarization Treatment:** After removing compost from the bin, spread it into a shallow pile (6 to 8 inches deep) on top of clear plastic, making it 10 to 15 feet long and 4 to 8 feet wide. Cover with a clear plastic sheet and tuck in the edges to prevent worm escape. Leave the setup in full sun for 2 to 3 days to allow the temperature to rise above 150\u00b0F. This temperature is necessary to kill both adult worms and their cocoons.\n\n3. **Prevention of Spread:** Do not use unsolarized compost in your potting mixes or garden beds, as this risks spreading jumping worms. Only compost that has been heat-treated should be distributed.\n\nIn summary: Identify jumping worms by their distinctive movements, castings, and white clitellum; hot compost or solarize infested material to kill them; and take care not to spread unsanitized compost. For more in-depth guidance, consult local Cooperative Extension master gardener resources or reputable invasive species sites for fact sheets.",
+        "images": [
+            "../sample_images/#789132_0.jpg",
+            "../sample_images/#789132_1.jpg"
+        ],
+        "category": "Weeds/Invasive Plants Management",
+        "entity_type": "plant",
+        "entity_name": "jumping worm",
+        "entity_scientific_name": "",
+        "entity_common_names": [],
+        "meta_data_state": "Vermont",
+        "meta_data_county": "Chittenden County",
+        "meta_data_asked_time": "2022-05-03 20:42:23"
+    },
+    {
+        "id": "#753655",
+        "question": "Please answer the following user question. You should first analyze the provided image, mentioning any visible clues or observations. Then, present the identification result. Write the entire content as one coherent paragraph (analysis + results). \nUser: Is this odd alien growing on my hedge a fungus or an egg pod?",
+        "answer": "The images show clusters of unusual, swollen, and contorted growths on the leaves of your hedge, which appear as irregular, raised galls with somewhat fuzzy or textured surfaces. These are classic signs of leaf galls rather than fungi or egg pods. Leaf galls form when certain tiny insects or mites, such as gall-inducing thrips, aphids, or mites, interact with the growing leaf tissue, causing it to swell and create a protective habitat for the insects inside. Specifically, these growths resemble galls caused by leaf-gall thrips (Gynaikothrips uzeli), which induce the plant to produce these distinctive leaf deformities. While they may look odd or alien-like, these galls generally do not harm the overall health of your hedge and do not require treatment or removal. Their presence is a natural part of the insect\u2019s life cycle, and spraying insecticides is usually ineffective and not recommended.",
+        "images": [
+            "../sample_images/#753655_0.jpg",
+            "../sample_images/#753655_1.jpg"
+        ],
+        "category": "Plant Disease Identification",
+        "entity_type": "plant disease",
+        "entity_name": "leaf gall",
+        "entity_scientific_name": "Gynaikothrips uzeli (Zimmermann, 1900)",
+        "entity_common_names": [],
+        "meta_data_state": "Minnesota",
+        "meta_data_county": "Hennepin County",
+        "meta_data_asked_time": "2021-06-03 02:29:46"
+    },
+    {
+        "id": "#726876",
+        "question": "I am trying to identify two trees planted in my front yard. We bought the house 2 years ago and they were newly planted at that time but have been growing vigorously. I fear they are the wrong tree in the wrong place and will get too large. I think I may need to try to dig them up and transplant them if they are a variety that will continue to grow. I have had to trim them back a bit as they are encroaching on the entry steps and touching the house. Besides the identification, is transplantation a reasonable thing to do or would they likely not survive that? (Plant identification)",
+        "answer": "Based on your description and the provided images, the trees in your front yard are Blue Atlas Cedars (Cedrus atlantica 'Glauca'). This species is a coniferous evergreen that can reach 40\u201360 feet (sometimes up to 120 feet) in height, with a pyramidal form in youth and a flat-topped habit as it matures. The 'Glauca' cultivar is distinguished by its striking bluish-green, clustered needles and stout, spreading twigs. Over time, this tree can become very large and is generally better suited for parks or spacious landscapes rather than locations close to houses or entryways.\n\nTransplantation is a feasible option if you believe the current placement is unsuitable, especially considering the mature size and branching of the Blue Atlas Cedar. If you decide to transplant, it is important to dig up as much of the root system as possible to maximize survival. Be aware that transplanting will likely suppress the tree's growth for 1\u20132 growing seasons as it recovers, but survival is possible with proper care. Ensure the new location provides ample space, moist but well-drained soil, and protection from sweeping winds for best long-term results.",
+        "images": [
+            "../sample_images/#726876_0.jpg",
+            "../sample_images/#726876_1.jpg",
+            "../sample_images/#726876_2.jpg"
+        ],
+        "category": "Plant Care and Gardening Guidance",
+        "entity_type": "plant",
+        "entity_name": "blue atlas cedar",
+        "entity_scientific_name": "",
+        "entity_common_names": [],
+        "meta_data_state": "Oregon",
+        "meta_data_county": "Multnomah County",
+        "meta_data_asked_time": "2020-09-25 19:59:13"
+    },
+    {
+        "id": "#874043",
+        "question": "Our Pin Oak has had this problem for a while and I can\u2019t find anything on Google about what it is. We cut a small limb in October a few years back and noticed it was black in the core. Now the hole is weeping a black substance. There is also a small hole underneath it that has developed a crack that has worked its way down the trunk. The tree is otherwise healthy. The only thing we can think of is that it might have been shot with a copper or lead pellet. Do you have any ideas about this Pin Oak mystery and is there something we can do to keep this tree?",
+        "answer": "Your Pin Oak is exhibiting symptoms of slime flux (also known as wetwood), a common condition in oaks and several other tree species. This issue typically presents as dark, foul-smelling sap seeping from wounds, cracks, or cuts in the trunk or branches. The sap may be frothy and white at the point of exit and often turns gray or white upon drying. The appearance can be alarming, but generally does not indicate a serious threat to the overall health of a mature tree.\n\nSlime flux occurs when bacteria and yeast enter the tree through wounds caused by pruning, breakage, cracks, or other injuries. Once inside, these microorganisms live in the heartwood, producing gases that force sap to the surface. The bacteria are not true pathogens and usually do not cause further harm to the tree's live tissues. However, their activity can delay wound healing and sometimes weaken the wood structure.\n\nThis condition can appear after a tree is wounded (including by pruning or possible physical damage such as a pellet), as this provides an entry point for the bacteria. Inside affected limbs, the core wood often shows dark, water-soaked lesions, as seen in your photos.\n\nThere is no cure or direct treatment for slime flux. Old practices like installing drain tubes or boring additional holes are now discouraged, as they do more harm than good by increasing wood decay risk. To help your tree:\n- Avoid unnecessary wounding of the trunk and branches.\n- Use proper pruning techniques to promote rapid closure of any cuts.\n- Provide good general care, including adequate irrigation during drought and mulching to protect roots and conserve soil moisture.\n- Prevent further injury from lawnmowers or excessive foot traffic near the tree's base.\n\nMost trees with slime flux remain otherwise healthy and can live for many years. The best course is to minimize new wounds and monitor your tree\u2019s condition. If you are concerned about structural integrity or decline, consult a certified arborist for an on-site evaluation.",
+        "images": [
+            "../sample_images/#874043_0.jpg",
+            "../sample_images/#874043_1.jpg",
+            "../sample_images/#874043_2.jpg"
+        ],
+        "category": "Plant Disease Management",
+        "entity_type": "plant disease",
+        "entity_name": "slime flux",
+        "entity_scientific_name": "",
+        "entity_common_names": [],
+        "meta_data_state": "Ohio",
+        "meta_data_county": "Hancock County",
+        "meta_data_asked_time": "2024-06-21 10:33:00"
+    },
+    {
+        "id": "#870585",
+        "question": "Please answer the following user question. You should first analyze the provided image, mentioning any visible clues or observations. Then, present the identification result. Write the entire content as one coherent paragraph (analysis + results). \nUser: Can you provide a plant ID? I\u2019m trying to identify this plant. Wasn\u2019t there last year so I\u2019m not sure what it is.",
+        "answer": "The images show a dense, bushy plant with long, narrow, lance-shaped leaves that are serrated along the edges, arranged alternately along the stems. The fresh green foliage forms a somewhat uniform clump near a building\u2019s base with surrounding soil and some dried leaves. This growth habit and leaf morphology are characteristic of Canada goldenrod (Solidago canadensis L.). While not yet in bloom in these photos, this native perennial typically produces tall, leafy stems that later bear bright yellow flower clusters from late summer into fall. Canada goldenrod is important ecologically as a nectar source for pollinators and is commonly found in a variety of habitats such as prairies and meadows across the U.S. and Canada. Despite misconceptions, it is unlikely to cause allergies because its pollen is insect-dispersed, unlike allergenic ragweed. Overall, your new plant from last year is indeed Canada goldenrod, a beneficial and native wildflower species.",
+        "images": [
+            "../sample_images/#870585_0.jpg",
+            "../sample_images/#870585_1.jpg"
+        ],
+        "category": "Plant Identification",
+        "entity_type": "plant",
+        "entity_name": "canada goldenrod",
+        "entity_scientific_name": "Solidago canadensis L., 1753",
+        "entity_common_names": [],
+        "meta_data_state": "Minnesota",
+        "meta_data_county": "Ramsey County",
+        "meta_data_asked_time": "2024-05-29 12:39:00"
+    }
+]

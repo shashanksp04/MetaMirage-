@@ -1,0 +1,29 @@
+[2026-02-01 11:51:17] ==========================================
+[2026-02-01 11:51:17] LLMs-as-Judges | STANDARD
+[2026-02-01 11:51:17] Model (Judge=Subject): meta-llama/Llama-3.2-11B-Vision-Instruct
+[2026-02-01 11:51:17] API Base: http://127.0.0.1:11434/v1
+[2026-02-01 11:51:17] Processes: 8
+[2026-02-01 11:51:17] ==========================================
+[2026-02-01 11:51:17] ------------------------------------------
+[2026-02-01 11:51:17] Benchmark: standard (ID)
+[2026-02-01 11:51:17] API Model: meta-llama/Llama-3.2-11B-Vision-Instruct
+[2026-02-01 11:51:17] Input: ../Datasets/sample_inference/sample_standard_benchmark_ID_Llama-3.2-11B-Vision-Instruct.json
+Processing 124 items.
+Processing items:   0%|          | 0/124 [00:00<?, ?it/s]Processing items:   1%|          | 1/124 [00:01<03:58,  1.94s/it]Processing items:   6%|▌         | 7/124 [00:02<00:29,  3.98it/s]Processing items:  11%|█▏        | 14/124 [00:02<00:14,  7.85it/s]Processing items:  17%|█▋        | 21/124 [00:02<00:09, 11.00it/s]Processing items:  23%|██▎       | 28/124 [00:03<00:07, 13.35it/s]Processing items:  29%|██▉       | 36/124 [00:03<00:05, 15.79it/s]Processing items:  35%|███▍      | 43/124 [00:03<00:04, 17.36it/s]Processing items:  40%|████      | 50/124 [00:04<00:04, 17.79it/s]Processing items:  47%|████▋     | 58/124 [00:04<00:03, 19.34it/s]Processing items:  52%|█████▏    | 65/124 [00:05<00:02, 19.74it/s]Processing items:  58%|█████▊    | 72/124 [00:05<00:02, 19.65it/s]Processing items:  65%|██████▍   | 80/124 [00:05<00:02, 20.12it/s]Processing items:  71%|███████   | 88/124 [00:06<00:01, 20.58it/s]Processing items:  77%|███████▋  | 96/124 [00:06<00:01, 21.12it/s]Processing items:  83%|████████▎ | 103/124 [00:06<00:01, 20.60it/s]Processing items:  90%|████████▉ | 111/124 [00:07<00:00, 20.98it/s]Processing items:  95%|█████████▌| 118/124 [00:07<00:00, 21.39it/s]Processing items: 100%|██████████| 124/124 [00:07<00:00, 16.45it/s]
+Processing completed.
+Total successful items: 124. 
+Remaining items to process: 0.
+[2026-02-01 11:51:26] ✅ Completed: standard (ID)
+[2026-02-01 11:51:26] Progress: 50% (1/2)
+[2026-02-01 11:51:26] ------------------------------------------
+[2026-02-01 11:51:26] Benchmark: standard (MG)
+[2026-02-01 11:51:26] API Model: meta-llama/Llama-3.2-11B-Vision-Instruct
+[2026-02-01 11:51:26] Input: ../Datasets/sample_inference/sample_standard_benchmark_MG_Llama-3.2-11B-Vision-Instruct.json
+Processing 170 items.
+Processing items:   0%|          | 0/170 [00:00<?, ?it/s]Processing items:   1%|          | 1/170 [00:00<02:46,  1.01it/s]Processing items:   4%|▍         | 7/170 [00:01<00:29,  5.56it/s]Processing items:   8%|▊         | 13/170 [00:02<00:20,  7.73it/s]Processing items:  11%|█         | 19/170 [00:02<00:17,  8.76it/s]Processing items:  15%|█▌        | 26/170 [00:03<00:14, 10.07it/s]Processing items:  19%|█▉        | 32/170 [00:03<00:13, 10.19it/s]Processing items:  23%|██▎       | 39/170 [00:04<00:12, 10.79it/s]Processing items:  27%|██▋       | 46/170 [00:04<00:11, 10.92it/s]Processing items:  32%|███▏      | 54/170 [00:05<00:09, 11.61it/s]Processing items:  36%|███▌      | 61/170 [00:06<00:08, 12.14it/s]Processing items:  39%|███▉      | 67/170 [00:06<00:08, 11.68it/s]Processing items:  44%|████▎     | 74/170 [00:07<00:07, 12.09it/s]Processing items:  47%|████▋     | 80/170 [00:07<00:07, 11.42it/s]Processing items:  51%|█████     | 87/170 [00:08<00:07, 11.64it/s]Processing items:  55%|█████▌    | 94/170 [00:08<00:06, 11.79it/s]Processing items:  59%|█████▉    | 101/170 [00:09<00:05, 11.88it/s]Processing items:  64%|██████▎   | 108/170 [00:10<00:05, 11.56it/s]Processing items:  68%|██████▊   | 116/170 [00:10<00:04, 12.15it/s]Processing items:  72%|███████▏  | 122/170 [00:11<00:04, 11.74it/s]Processing items:  75%|███████▌  | 128/170 [00:11<00:03, 11.43it/s]Processing items:  79%|███████▉  | 134/170 [00:12<00:03, 11.23it/s]Processing items:  83%|████████▎ | 141/170 [00:12<00:02, 11.59it/s]Processing items:  87%|████████▋ | 148/170 [00:13<00:01, 11.60it/s]Processing items:  91%|█████████ | 155/170 [00:14<00:01, 11.69it/s]Processing items:  95%|█████████▌| 162/170 [00:14<00:00, 11.46it/s]Processing items: 100%|██████████| 170/170 [00:15<00:00, 13.65it/s]Processing items: 100%|██████████| 170/170 [00:15<00:00, 11.20it/s]
+Processing completed.
+Total successful items: 170. 
+ Remaining items to process: 0.
+[2026-02-01 11:51:42] ✅ Completed: standard (MG)
+[2026-02-01 11:51:42] Progress: 100% (2/2)
+[2026-02-01 11:51:42] Finished in 25s

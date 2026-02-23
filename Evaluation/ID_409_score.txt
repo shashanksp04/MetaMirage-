@@ -1,0 +1,8 @@
+
+Judge: Llama-3.2-11B-Vision-Instruct | Subject: Llama-3.2-11B-Vision-Instruct | Mode: ID | Benchmark: standard
+
++-------------------------------+----------------------------+--------------------+
+|            subject            | identification_accuracy(%) | reasoning_accuracy |
++-------------------------------+----------------------------+--------------------+
+| Llama-3.2-11B-Vision-Instruct |           16.94            |        1.31        |
++-------------------------------+----------------------------+--------------------+

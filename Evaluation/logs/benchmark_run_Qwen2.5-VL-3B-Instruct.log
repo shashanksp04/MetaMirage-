@@ -1,0 +1,27 @@
+[2026-02-01 11:34:38] ==========================================
+[2026-02-01 11:34:38] LLMs-as-Judges | STANDARD
+[2026-02-01 11:34:38] Model (Judge=Subject): Qwen/Qwen2.5-VL-3B-Instruct
+[2026-02-01 11:34:38] API Base: http://127.0.0.1:11434/v1
+[2026-02-01 11:34:38] Processes: 8
+[2026-02-01 11:34:38] ==========================================
+[2026-02-01 11:34:38] ------------------------------------------
+[2026-02-01 11:34:38] Benchmark: standard (ID)
+[2026-02-01 11:34:38] API Model: Qwen/Qwen2.5-VL-3B-Instruct
+[2026-02-01 11:34:38] Input: ../Datasets/sample_inference/sample_standard_benchmark_ID_Qwen2.5-VL-7B-Instruct.json
+Processing 0 items.
+Processing completed.
+Total successful items: 4324. 
+Remaining items to process: -3915.
+[2026-02-01 11:34:39] ✅ Completed: standard (ID)
+[2026-02-01 11:34:39] Progress: 50% (1/2)
+[2026-02-01 11:34:39] ------------------------------------------
+[2026-02-01 11:34:39] Benchmark: standard (MG)
+[2026-02-01 11:34:39] API Model: Qwen/Qwen2.5-VL-3B-Instruct
+[2026-02-01 11:34:39] Input: ../Datasets/sample_inference/sample_standard_benchmark_MG_Qwen2.5-VL-7B-Instruct.json
+Processing 0 items.
+Processing completed.
+Total successful items: 2360. 
+ Remaining items to process: -1951.
+[2026-02-01 11:34:40] ✅ Completed: standard (MG)
+[2026-02-01 11:34:40] Progress: 100% (2/2)
+[2026-02-01 11:34:40] Finished in 2s

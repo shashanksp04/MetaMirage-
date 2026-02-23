@@ -1,0 +1,46 @@
+[2025-11-29 15:15:30] 
+================================================================================
+[2025-11-29 15:15:30] Benchmark Configuration
+[2025-11-29 15:15:30] ================================================================================
+[2025-11-29 15:15:30] Judge Model: Qwen/Qwen2.5-3B-Instruct
+[2025-11-29 15:15:30] Benchmarks: confidence
+[2025-11-29 15:15:30] Subject Model: Qwen/Qwen2.5-3B-Instruct
+[2025-11-29 15:15:30] Processes: 100
+[2025-11-29 15:15:30] Temperature: 0.6
+[2025-11-29 15:15:30] Log File: ./logs/benchmark_run_Qwen2.5-3B-Instruct.log
+[2025-11-29 15:15:30] Total Tasks: 2
+[2025-11-29 15:15:30] 
+================================================================================
+[2025-11-29 15:15:30] Starting ID-based scoring
+[2025-11-29 15:15:30] ================================================================================
+[2025-11-29 15:15:30] Running: confidence (ID) | Subject: Qwen/Qwen2.5-3B-Instruct | Judge: Qwen2.5-3B-Instruct
+Traceback (most recent call last):
+  File "/u/ssingh38/MetaMirage/Evaluation/LLMsAsJudges_ID.py", line 228, in <module>
+    scorer.scoring()
+  File "/u/ssingh38/MetaMirage/Evaluation/LLMsAsJudges_ID.py", line 167, in scoring
+    with open(self.raw_data_file, "r", encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '../Datasets/sample_inference/sample_confidence_benchmark_ID_Qwen/Qwen2.5-3B-Instruct.json'
+[2025-11-29 15:15:32] ❌ Failed:    confidence (ID)
+[2025-11-29 15:15:32] Progress: 50% (1/2) | Elapsed: 00:00:02 | Remaining: 0h 0m
+[2025-11-29 15:15:32] 
+================================================================================
+[2025-11-29 15:15:32] Starting MG-based scoring
+[2025-11-29 15:15:32] ================================================================================
+[2025-11-29 15:15:32] Running: confidence (MG) | Subject: Qwen/Qwen2.5-3B-Instruct | Judge: Qwen2.5-3B-Instruct
+Traceback (most recent call last):
+  File "/u/ssingh38/MetaMirage/Evaluation/LLMsAsJudges_MG.py", line 236, in <module>
+    scorer.scoring()
+  File "/u/ssingh38/MetaMirage/Evaluation/LLMsAsJudges_MG.py", line 172, in scoring
+    with open(self.raw_data_file, "r", encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '../Datasets/sample_inference/sample_confidence_benchmark_MG_Qwen/Qwen2.5-3B-Instruct.json'
+[2025-11-29 15:15:32] ❌ Failed:    confidence (MG)
+[2025-11-29 15:15:32] Progress: 100% (2/2) | Elapsed: 00:00:02 | Remaining: 0h 0m
+[2025-11-29 15:15:32] 
+================================================================================
+[2025-11-29 15:15:32] Benchmark Completed
+[2025-11-29 15:15:32] ================================================================================
+[2025-11-29 15:15:32] Total Runtime: 00:00:02
+[2025-11-29 15:15:32] Results saved in ./results/
+[2025-11-29 15:15:32] Log saved to ./logs/benchmark_run_Qwen2.5-3B-Instruct.log

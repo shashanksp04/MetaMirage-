@@ -1,0 +1,2 @@
+Inference/results/confidence/*.json filter=lfs diff=lfs merge=lfs -text
+Datasets/sample_inference/*.json filter=lfs diff=lfs merge=lfs -text
