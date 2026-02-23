@@ -1,0 +1,197 @@
+from typing import Dict, List, Any
+from pypdf import PdfReader
+import re
+
+
+class PDFAddition:
+    """
+    Service responsible for ingesting page-aware PDF content
+    into a vector database with deduplication and chunking.
+    """
+
+    def __init__(
+        self,
+        collection,
+        content_utils,
+        null_str: str = "",
+    ):
+        """
+        Args:
+            collection: Vector database collection instance
+            content_utils: Instance of ContentUtils
+            null_str: Placeholder value for empty metadata fields
+        """
+        self.collection = collection
+        self.content_utils = content_utils
+        self.null_str = null_str
+
+    def clean_pdf_text(self, text: str) -> str:
+        # Remove hyphenation at line breaks: "exam-\nple" → "example"
+        text = re.sub(r"-\n(\w+)", r"\1", text)
+
+        # Replace line breaks within paragraphs with spaces
+        text = re.sub(r"(?<!\n)\n(?!\n)", " ", text)
+
+        # Normalize multiple newlines
+        text = re.sub(r"\n{2,}", "\n\n", text)
+
+        # Normalize whitespace
+        text = re.sub(r"[ \t]+", " ", text)
+
+        return text.strip()
+
+    def extract_pdf_pages(self, pdf_path: str) -> List[Dict[str, str]]:
+        """Extracts and cleans text from each page of a PDF.
+
+        Args:
+            pdf_path: Local filesystem path to the PDF file
+
+        Returns:
+            List of dicts with page number and cleaned text:
+            [{"page": int, "text": str}]
+        """
+        reader = PdfReader(pdf_path)
+        pages = []
+
+        for page_num, page in enumerate(reader.pages, start=1):
+            raw_text = page.extract_text()
+            if not raw_text:
+                continue
+
+            clean_text = self.clean_pdf_text(raw_text)
+            if clean_text:
+                pages.append({
+                    "page": page_num,
+                    "text": clean_text
+                })
+
+        return pages
+
+
+    def add_pdf_content(
+        self,
+        *,
+        pdf_path: str,
+        source_id: str,
+        title: str,
+        language: str = "en"
+    ) -> Dict:
+        """
+        Adds page-aware PDF content to the vector database.
+
+        Use this tool when:
+        - The user provides a PDF
+        - New documents need to be indexed for retrieval
+
+        Guarantees:
+        - Token-based chunking
+        - Hash-based deduplication
+        - Idempotent ingestion
+
+        Args:
+            pdf_path: Local filesystem path to the PDF file
+            source_id: Unique identifier for the PDF source
+            title: Human-readable document title
+            language: Language code (default: "en")
+
+        Returns:
+            Success:
+            {
+                "status": "success",
+                "source_type": "pdf",
+                "source_id": str,
+                "chunks_added": int,
+                "chunks_skipped_as_duplicates": int
+            }
+
+            Error:
+            {
+                "status": "error",
+                "error_message": str
+            }
+        """
+        try:
+            pdf_pages = self.extract_pdf_pages(pdf_path)
+        except Exception as e:
+            return {
+                "status": "error",
+                "error_message": f"Failed to extract PDF text: {str(e)}",
+            }
+
+        if not pdf_pages:
+            return {
+                "status": "error",
+                "error_message": "No extractable text found in PDF",
+            }
+
+        documents = []
+        metadatas = []
+        ids = []
+
+        added = 0
+        skipped = 0
+        seen_hashes = set()
+
+        for page_data in pdf_pages:
+            page_num = page_data["page"]
+            page_text = page_data["text"]
+
+            chunks = self.content_utils.chunk_by_tokens(
+                page_text,
+                max_tokens=self.content_utils.chunk_config["pdf"]["max_tokens"],
+                overlap=self.content_utils.chunk_config["pdf"]["overlap"],
+            )
+
+            for chunk_index, chunk in enumerate(chunks):
+                content_hash = self.content_utils.compute_content_hash(chunk)
+
+                if content_hash in seen_hashes:
+                    skipped += 1
+                    continue
+
+                if self.content_utils.content_hash_exists(
+                    self.collection,
+                    content_hash
+                ):
+                    skipped += 1
+                    continue
+
+                seen_hashes.add(content_hash)
+                added += 1
+
+                doc_id = f"{source_id}_p{page_num}_c{chunk_index}"
+
+                documents.append(f"Title: {title}\n\n{chunk}")
+                metadatas.append({
+                    "source_type": "pdf",
+                    "source_id": source_id,
+                    "title": title,
+                    "url": self.null_str,
+                    "page": page_num,
+                    "chunk_index": chunk_index,
+                    "location": self.null_str,
+                    "month_year": self.null_str,
+                    "content_hash": content_hash,
+                    "language": language,
+                })
+                ids.append(doc_id)
+
+        if not documents:
+            return {
+                "status": "error",
+                "error_message": "No new content to add after deduplication",
+            }
+
+        self.collection.add(
+            documents=documents,
+            metadatas=metadatas,
+            ids=ids,
+        )
+
+        return {
+            "status": "success",
+            "source_type": "pdf",
+            "source_id": source_id,
+            "chunks_added": added,
+            "chunks_skipped_as_duplicates": skipped,
+        }
