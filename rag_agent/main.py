@@ -1,4 +1,5 @@
 import chromadb
+import time
 from .tools.pdf_addition import PDFAddition
 from .tools.web_search import WebSearch
 from .tools.web_addition import WebAddition
@@ -38,39 +39,112 @@ class MainAgent:
             self._tracked_extract_keywords,
         ]
     
-    def _tracked_retrieve_content(self, *, query: str, location: str | None = None, 
-                                   month_year: str | None = None, title: str | None = None) -> Dict:
+    def _tracked_retrieve_content(
+        self,
+        *,
+        query: str,
+        location: str | None = None,
+        month_year: str | None = None,
+        title: str | None = None,
+    ) -> Dict:
         """Retrieves relevant content from the vector database using progressive metadata filtering.
-        
+
         Use this tool FIRST for every query to retrieve relevant information from the knowledge base.
-        
-        Args:
-            query: The user's query or question
-            location: Optional geographic location filter
-            month_year: Optional temporal filter (format: "MM/YYYY")
-            title: Optional document title filter
-            
-        Returns:
-            Dict with status, results, strategy, and used_filter
         """
-        import sys
         print(f"[RAG Tools] retrieve_content: CALLED", flush=True)
-        result = self.retrieve_content(query=query, location=location, month_year=month_year, title=title)
+
+        try:
+            result = self.retrieve_content(
+                query=query,
+                location=location,
+                month_year=month_year,
+                title=title,
+            )
+        except Exception as e:
+            # Self-heal: stale collection handle after another worker reset/deleted the collection
+            msg = str(e).lower()
+            if "does not exist" in msg or "not exist" in msg:
+                print(
+                    f"[RAG Tools] retrieve_content: Detected stale collection handle ({e}). "
+                    f"Re-binding collection + dependent tools and retrying once...",
+                    flush=True,
+                )
+                try:
+                    self.collection = self.client.get_or_create_collection(
+                        name="meta-mirage_collection",
+                        embedding_function=self.embedding_function,
+                    )
+                    # Rebind components that depend on collection
+                    self.pdf_addition = PDFAddition(self.collection, self.content_utils, self.null_str)
+                    self.web_addition = WebAddition(self.collection, self.content_utils, self.null_str, self.null_int)
+                    self.confidence_evaluator = ConfidenceEvaluator(self.collection, self.content_utils)
+
+                    # Retry once after rebind
+                    result = self.retrieve_content(
+                        query=query,
+                        location=location,
+                        month_year=month_year,
+                        title=title,
+                    )
+                except Exception as e2:
+                    print(f"[RAG Tools] ✗ retrieve_content: FAILED after rebind - {e2}", flush=True)
+                    return {
+                        "status": "error",
+                        "error_message": f"Collection stale handle; retry after rebind failed: {e2}",
+                        "results": [],
+                    }
+            else:
+                print(f"[RAG Tools] ✗ retrieve_content: EXCEPTION - {e}", flush=True)
+                return {
+                    "status": "error",
+                    "error_message": str(e),
+                    "results": [],
+                }
+
         status = result.get("status", "unknown")
         if status == "success":
             results_count = len(result.get("results", []))
             print(f"[RAG Tools] ✓ retrieve_content: SUCCESS ({results_count} results)", flush=True)
         else:
-            print(f"[RAG Tools] ✗ retrieve_content: FAILED - {result.get('error_message', 'Unknown error')}", flush=True)
+            print(
+                f"[RAG Tools] ✗ retrieve_content: FAILED - {result.get('error_message', 'Unknown error')}",
+                flush=True,
+            )
         return result
     
     def reset_collection(self) -> None:
         """Drop and recreate the collection (clean slate)."""
-        self.client.delete_collection(name="meta-mirage_collection")
-        self.collection = self.client.get_or_create_collection(
-            name="meta-mirage_collection",
-            embedding_function=self.embedding_function
-        )
+        name = "meta-mirage_collection"
+
+        # Delete if exists (tolerate missing / concurrent deletion)
+        try:
+            self.client.delete_collection(name=name)
+            print(f"[RAG reset_collection] Deleted collection: {name}")
+        except Exception as e:
+            msg = str(e).lower()
+            if "does not exist" in msg or "not exist" in msg:
+                print(f"[RAG reset_collection] Collection missing (ok): {e}")
+            else:
+                # If another process deleted it between checks, some clients throw differently.
+                # You can choose to re-raise, but for testing it's better to proceed.
+                print(f"[RAG reset_collection] Delete failed (continuing for test): {e}")
+
+        # Always recreate (get_or_create is idempotent)
+        try:
+            self.collection = self.client.get_or_create_collection(
+                name=name,
+                embedding_function=self.embedding_function
+            )
+            print(f"[RAG reset_collection] Created/loaded collection: {name}")
+        except Exception as e:
+            # Rare case: if DB is mid-delete in another process, a short retry helps.
+            print(f"[RAG reset_collection] get_or_create failed, retrying once: {e}")
+            time.sleep(0.5)
+            self.collection = self.client.get_or_create_collection(
+                name=name,
+                embedding_function=self.embedding_function
+            )
+
         self.pdf_addition = PDFAddition(self.collection, self.content_utils, self.null_str)
         self.web_addition = WebAddition(self.collection, self.content_utils, self.null_str, self.null_int)
         self.confidence_evaluator = ConfidenceEvaluator(self.collection, self.content_utils)
@@ -232,8 +306,8 @@ class MainAgent:
             tool_name = getattr(tool, '__name__', 'unknown')
             print(f"[RAG Agent Init]   Tool {i+1}: {tool_name}")
         
-        SGLANG_BASE_URL = "http://127.0.0.1:11434/v1"
-        SGLANG_MODEL = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+        SGLANG_BASE_URL = self.api_base
+        SGLANG_MODEL = self.test_model
         API_KEY = "EMPTY"
 
         model_litellm = LiteLlm(
