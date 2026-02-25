@@ -1,0 +1,38 @@
+# Example manifest for the preload pipeline.
+# Copy to manifest.yaml and adjust paths/settings.
+
+# source:
+#   type: csv  # or html, pdf
+#   path: path/to/source
+# output:
+#   path: path/to/output
+
+---
+
+## `manifest.example.yaml`
+
+```yaml
+sources:
+  - name: usda_plants_csv
+    type: csv
+    path: data/seeds/usda_plants.csv
+    entity_type: plant
+    source_org: USDA
+    tags: [plants, usa]
+    id_field: "Symbol"          # optional: unique column in CSV
+
+  - name: ncsu_toolbox_pages
+    type: html_page_list
+    urls:
+      - "https://plants.ces.ncsu.edu/plants/"
+    entity_type: plant
+    source_org: NC State Extension
+    tags: [plants, extension]
+    max_pages: 50               # safety cap (used for html_list sources)
+
+  - name: apis_id_aids_pdfs
+    type: pdf_dir
+    path: data/seeds/aphis_pdfs/
+    entity_type: pest
+    source_org: USDA APHIS
+    tags: [pdf, identification]
