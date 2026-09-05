@@ -272,6 +272,28 @@ The current transformed strategy score selects **B**, while raw mean scoring wou
 
 **Why this design.** Stricter metadata filters shrink the corpus; if that subset has weak embedding matches, a **looser** filter (or `semantic_only`) can still win on **average similarity**, keeping retrieval grounded in vector relevance while using metadata when it helps.
 
+#### 2.3.4.1 Base/runtime result merging
+
+When the curated base collection is enabled, `DualCollectionRetriever` applies the priority-retrieval process above **independently** to each collection:
+
+```text
+base collection    -> best base strategy    -> up to k base chunks
+runtime collection -> best runtime strategy -> up to k runtime chunks
+                                      |
+                                      v
+                         merge the winning chunk lists
+                                      |
+                         cross-collection deduplication
+                                      |
+                    global similarity sort and final top-k
+```
+
+The system does **not** compare the base and runtime strategies and select only one collection’s result set. It also does not merge every chunk returned by every candidate strategy. Instead, each collection first keeps only its own winning strategy and its chunks; those two winning lists are then combined.
+
+Cross-collection duplicates are identified using `content_hash`, then `chunk_id`, then the chunk text as a fallback key. If the same content is present in both collections, the base result is retained. Remaining results are sorted globally by raw Qdrant cosine similarity, with higher scores first, and the final top `k` chunks are returned. Each result includes `retrieval_source` (`base` or `runtime`).
+
+The returned `strategy` field is a diagnostic/confidence label. It is selected from the collection evaluation with the larger result count; it does not replace the globally merged and ranked evidence. Web/PDF augmentation writes only to the runtime collection, so newly ingested evidence participates in subsequent retrievals without mutating the curated base.
+
 #### 2.3.5 Score semantics follow-up research
 
 The current implementation uses raw Qdrant cosine similarity consistently across per-hit retrieval values, dual-collection merging, and confidence evaluation. Progressive strategy selection applies the nonlinear `1 / (2 - q)` transform to each raw score before taking the arithmetic mean. This preserves higher-is-better ordering while favoring strategies with exceptionally strong hits.
@@ -280,7 +302,27 @@ Follow-up research should compare this transformed mean with raw mean scoring an
 
 #### 2.3.6 Confidence scoring and metadata “scope”
 
-`ConfidenceEvaluator.evaluate_retrieval_confidence` calls the same `**retrieve_with_priority_filters`** path, then applies a **separate** confidence model: raw similarity, coverage, consistency, and a **scope weight** tied to which **strategy name** won in §2.3.4. Higher weights apply when stricter filters win (e.g. `hardiness_zone+month_year+title` vs `semantic_only`). See `scope_weights` in `rag_agent/tools/confidence_evaluator.py` for the exact mapping. That means **better metadata alignment** (zone + month + title) both influences which chunks win priority retrieval and tends to raise **confidence_level**, reducing unnecessary web search.
+`ConfidenceEvaluator.evaluate_retrieval_confidence` calls the same `**retrieve_with_priority_filters`** path, then combines four factors:
+
+| Factor | What it measures | Weight |
+| ------ | ---------------- | -----: |
+| **Similarity** (`similarity_score`) | Mean raw Qdrant cosine similarity of the final retrieved chunks; higher is better. | 0.50 |
+| **Coverage** (`coverage_score`) | Number of retrieved chunks, capped at 5: `min(num_chunks / 5, 1.0)`. This is evidence quantity, not aspect diversity. | 0.20 |
+| **Consistency** (`consistency_score`) | Agreement of the chunks’ similarity scores, computed as `max(0, 1 - 5 * population_variance)`. With one chunk, the score defaults to 0.7. | 0.20 |
+| **Retrieval scope** (`scope_score`) | Specificity of the selected metadata strategy. More constrained strategies receive higher scores. | 0.10 |
+
+The final score is:
+
+```text
+confidence_score = 0.50 * similarity_score
+                 + 0.20 * coverage_score
+                 + 0.20 * consistency_score
+                 + 0.10 * scope_score
+```
+
+The confidence levels are **high** for scores `>= 0.75`, **medium** for scores `>= 0.50`, and **low** otherwise. Scope weights are: `hardiness_zone+month_year+title` = 1.0, `hardiness_zone+month_year` = 0.9, `hardiness_zone+title` = 0.85, `hardiness_zone` = 0.8, `month_year` = 0.75, `title` = 0.7, and `semantic_only` = 0.4. See `scope_weights` in `rag_agent/tools/confidence_evaluator.py` for the source mapping.
+
+Thus, the proposed labels are mostly right, with two corrections: **coverage is result-count coverage rather than aspect diversity**, and **consistency is score consistency rather than explicit agreement across source collections**. Better metadata alignment (zone + month + title) influences priority retrieval and tends to raise confidence, reducing unnecessary web search.
 
 #### 2.3.7 Web search and metadata (`WebSearch`)
 
