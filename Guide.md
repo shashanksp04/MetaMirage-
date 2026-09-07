@@ -373,6 +373,7 @@ python generate.py \
   --test_model meta-llama/Llama-3.2-11B-Vision-Instruct \
   --device None \
   --ablation_id ablation_2_static_rag \
+  --combine_input_images false \
   --runtime_mode resume \
   --use_base_collection true
 ```
@@ -390,6 +391,8 @@ Use an exact key from `rag_agent/ablation_configs.json` for `--ablation_id`. The
 cd /path/to/MIRAGE-RAG/Inference
 bash bash_generate.sh
 ```
+
+Input-image combining is a standalone generation option and is not part of the ablation framework. The CLI flag `--combine_input_images` accepts `true`/`false` (as well as `1`/`0`, `yes`/`no`, and `on`/`off`) and defaults to `false`. The wrapper exposes the same setting through `COMBINE_INPUT_IMAGES` in `Inference/bash_generate.sh`. Leave it disabled for models that can consume multiple images directly; enable it only when a model benefits from one labeled panel image. When enabled, the pipeline combines up to the first three valid images and adds panel-label guidance to the final generation prompt.
 
 ### 3.1 Serving LLM backends (OpenAI-compatible API)
 
@@ -727,6 +730,7 @@ the full contract and `run.md` for operations.
 - Use `--use_base_collection false` only for runtime-only development/testing. Use `--snapshot_runtime` when a successful run should be snapshotted before runtime cleanup.
 - Match **`--embed_model_name`** and **`--device`** to your embedding setup.
 - Set run-level ablation in `Inference/bash_generate.sh` via **`ABLATION_ID`** (forwarded as `--ablation_id`).
+- Set image combining independently in `Inference/bash_generate.sh` via **`COMBINE_INPUT_IMAGES`** (forwarded as `--combine_input_images`); this setting is not resolved from ablation configuration.
 - Confirm the selected `ABLATION_ID` exists in `rag_agent/ablation_configs.json` (currently documented IDs: 2,3,4,5,7,8).
 - Confirm `rag_agent/model_instructions.md` has a matching `<!-- instruction:<ablation_id> -->` section (or intentional fallback to `fallback_ablation`).
 - If using enrichment: place **`CropDatabase.json`** or pass **`--crop_dictionary_path`**; use **`--disable_query_enrichment`** to force-disable.
@@ -834,7 +838,7 @@ Align `**Inference/generate.py`** flags (`--openai_api_base`, `--test_model`, et
 | Topic                                                                      | Path                                                                    |
 | -------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | Batch inference CLI                                                        | `Inference/generate.py`                                                 |
-| Batch run wrapper + ablation selector                                      | `Inference/bash_generate.sh` (`ABLATION_ID`)                            |
+| Batch run wrapper + selectors                                             | `Inference/bash_generate.sh` (`ABLATION_ID`, `COMBINE_INPUT_IMAGES`)    |
 | RAG agent + tools                                    | `rag_agent/main.py`, `rag_agent/tools/`                                 |
 | Qdrant store adapter                                 | `rag_agent/utils/qdrant_store.py`                                       |
 | Qdrant migration smoke test                          | `rag_agent/test_qdrant_migration.py`                                    |

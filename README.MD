@@ -149,6 +149,8 @@ INPUT_FILE="../Datasets/${BENCH_TYPE}/${BENCH_TYPE}_benchmark.json"
 
 Use the exact ablation key from `rag_agent/ablation_configs.json`, for example `ablation_2_static_rag` or `ablation_7_full_no_domain_filter`. An unknown key falls back to default runtime toggles and is not suitable for a controlled ablation run.
 
+Input-image combining is controlled independently from ablations. It is disabled by default; enable it for a model or run that benefits from receiving one labeled panel image by adding `--combine_input_images true` to the direct command. In `Inference/bash_generate.sh`, set `COMBINE_INPUT_IMAGES="true"` or `"false"`. When disabled, valid input images are sent individually; when enabled, up to the first three images are combined and labeled as separate panels.
+
 Batch inference (`Inference/generate.py`) coordinates RAG and generation across multiple workers and endpoints.
 
 - Reads input JSON and skips already successful items in output JSONL.
@@ -165,7 +167,7 @@ Run from `Inference/`:
 bash bash_generate.sh
 ```
 
-`bash_generate.sh` sets experiment configuration (including `ABLATION_ID`) and launches `generate.py`.
+`bash_generate.sh` sets experiment configuration (including `ABLATION_ID` and the independent `COMBINE_INPUT_IMAGES` setting) and launches `generate.py`.
 
 The database lifecycle can also be controlled directly:
 
