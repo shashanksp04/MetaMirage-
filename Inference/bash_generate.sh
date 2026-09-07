@@ -37,6 +37,9 @@ DEVICE="None"
 # Use an exact key from rag_agent/ablation_configs.json.
 ABLATION_ID="ablation_8_full_domain_filtered"
 
+# Enable only for models/runs that benefit from a single labeled image panel.
+COMBINE_INPUT_IMAGES="false"
+
 # Inference database lifecycle.
 BASE_COLLECTION="mirage_base"
 USE_BASE_COLLECTION="base"
@@ -66,6 +69,7 @@ python generate.py \
     --embed_model_name "$EMBED_MODEL_NAME" \
     --test_model "$TEST_MODEL" \
     --device "$DEVICE" \
+    --combine_input_images "$COMBINE_INPUT_IMAGES" \
     --base_collection "$BASE_COLLECTION" \
     --use_base_collection "$USE_BASE_COLLECTION" \
     --runtime_mode "$RUNTIME_MODE" \

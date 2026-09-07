@@ -406,6 +406,20 @@ def _normalize_allowed_states(allowed_states: Optional[List[str]]) -> Optional[L
     return list(allowed_states)
 
 
+def _parse_bool(value):
+    """Parse a CLI boolean value with an explicit error for invalid input."""
+    if isinstance(value, bool):
+        return value
+    normalized = str(value).strip().lower()
+    if normalized in {"1", "true", "yes", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "off"}:
+        return False
+    raise argparse.ArgumentTypeError(
+        f"Expected a boolean value (true/false, yes/no, on/off, or 1/0), got {value!r}"
+    )
+
+
 class Generate:
 
     def __init__(self, raw_data_file, output_file,
@@ -418,6 +432,7 @@ class Generate:
                  crop_dictionary_path: Optional[str] = "CropDatabase.json",
                  enable_query_enrichment: bool = True,
                  no_rag: bool = False,
+                 combine_input_images: bool = False,
                  ablation_id: str = "default",
                  allowed_states: Optional[List[str]] = None,
                  debug_single_item: bool = False,
@@ -443,6 +458,7 @@ class Generate:
         self.crop_dictionary_path = path_resolved
         self.enable_query_enrichment = bool(enable_query_enrichment) and found
         self.no_rag = bool(no_rag)
+        self.combine_input_images = bool(combine_input_images)
         self.ablation_id = (ablation_id or "").strip() or "default"
         self.allowed_states = _normalize_allowed_states(allowed_states)
         self.debug_single_item = bool(debug_single_item)
@@ -477,7 +493,7 @@ class Generate:
             new_images.append(new_path)
 
         panel_hint = ""
-        if len(new_images) >= 1:
+        if self.combine_input_images and len(new_images) >= 1:
             item_id = item.get("id")
             combined_dir = Path(self.output_file).resolve().parent / "combined_images"
             safe_id = re.sub(r"[^A-Za-z0-9._-]+", "_", str(item_id))
@@ -869,6 +885,12 @@ if __name__ == "__main__":
         help="Skip RAG retrieval and crop query enrichment; generate from the raw user prompt only (baseline).",
     )
     parser.add_argument(
+        "--combine_input_images",
+        type=_parse_bool,
+        default=False,
+        help="Combine valid input images into one labeled panel image before generation. Defaults to false.",
+    )
+    parser.add_argument(
         "--allowed_states",
         nargs="*",
         default=None,
@@ -896,6 +918,7 @@ if __name__ == "__main__":
         crop_dictionary_path=crop_path,
         enable_query_enrichment=not args.disable_query_enrichment,
         no_rag=args.no_rag,
+        combine_input_images=args.combine_input_images,
         ablation_id=args.ablation_id,
         allowed_states=args.allowed_states,
         debug_single_item=args.debug_single_item,

@@ -2,6 +2,8 @@
 
 Place the runtime crop dictionary JSON as **`CropDatabase.json`** in this directory (same folder as `generate.py`) for query enrichment, or pass `--crop_dictionary_path` with another path. Use `--disable_query_enrichment` or `--crop_dictionary_path ""` to turn enrichment off.
 
+Input-image combining is an independent run-level option and is not controlled by ablations. It is disabled by default. Pass `--combine_input_images true` (or `false`) to control whether valid input images are rendered into one labeled panel image before generation. `Inference/bash_generate.sh` exposes this as `COMBINE_INPUT_IMAGES`; enable it only for models or runs that require this workaround.
+
 ## Runtime architecture
 
 `generate.py` uses a staged inference pipeline:
